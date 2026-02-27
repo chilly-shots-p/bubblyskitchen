@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bubbly's Kitchen</title>
+
+<style>
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #fff8f0;
+}
+
+header {
+    text-align: center;
+    padding: 30px;
+    background: #ff914d;
+    color: white;
+}
+
+header img {
+    width: 120px;
+}
+
+h2 {
+    text-align: center;
+    margin-top: 40px;
+}
+
+.menu-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+    padding: 20px;
+    max-width: 1200px;
+    margin: auto;
+}
+
+.menu-item {
+    background: white;
+    border-radius: 10px;
+    padding: 15px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    text-align: center;
+}
+
+.menu-item img {
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 8px;
+}
+
+.price {
+    font-weight: bold;
+    color: #e65c00;
+}
+
+.order-section {
+    background: #fff3e0;
+    padding: 30px;
+    text-align: center;
+}
+
+button {
+    padding: 10px 15px;
+    margin-top: 10px;
+    border: none;
+    background: #ff6600;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button:hover {
+    background: #e65c00;
+}
+
+.whatsapp-btn {
+    background: #25D366;
+    display: inline-block;
+    margin-top: 15px;
+}
+
+footer {
+    background: #333;
+    color: white;
+    text-align: center;
+    padding: 20px;
+}
+</style>
+</head>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
+<body>
+<style>
+.large-image {
+    width: 500px;   /* Fixed size */
+    height: auto;   /* Keeps aspect ratio */
+}
+</style>
+<header>
+    <img src="images/Bubbly's Kitchen Logo.png" class="large-image" alt="Example Image">
+    <h1>Bubbly's Kitchen</h1>
+    <h3>MADE FRESH WHILE YOU WAIT</h3>
+    <p><strong>Pickup Only Available</strong></p>
+</header>
+
+<h2>Menu</h2>
+
+<div class="menu-container">
+
+<!-- Potato Chips -->
+<div class="menu-item">
+<img src="images/Chips.jpeg">
+<h3>Potato Chips</h3>
+<p class="price">Small - R16</p>
+<p class="price">Medium - R22</p>
+<p class="price">Large - R30</p>
+<input type="number" min="0" placeholder="Qty Small" id="chipsSmall">
+<input type="number" min="0" placeholder="Qty Medium" id="chipsMedium">
+<input type="number" min="0" placeholder="Qty Large" id="chipsLarge">
+</div>
+
+<div class="menu-item">
+<img src="images/Hot Dog.jpeg">
+<h3>Hot Dog</h3>
+<p class="price">R22</p>
+<input type="number" min="0" placeholder="Quantity" id="hotdog">
+</div>
+
+<div class="menu-item">
+<img src="images/Magwinya.webp">
+<h3>Fat Cake (Gwinya)</h3>
+<p class="price">R5</p>
+<input type="number" min="0" placeholder="Quantity" id="fatcake">
+</div>
+
+<div class="menu-item">
+<img src="images/Russian.jpeg">
+<h3>Russian</h3>
+<p class="price">R16</p>
+<input type="number" min="0" placeholder="Quantity" id="russian">
+</div>
+
+</div>
+
+<h2>Combo Deals</h2>
+
+<div class="menu-container">
+
+<div class="menu-item">
+<img src="images/Combo 1.jpeg">
+<h3>Combo 1 - Mkhuba</h3>
+<p class="price">Chips + Gwinya - R12</p>
+<input type="number" min="0" placeholder="Quantity" id="combo1">
+</div>
+
+<div class="menu-item">
+<img src="images/Combo 2.jpeg">
+<h3>Combo 2 - Mkhuba</h3>
+<p class="price">Chips + Half Russian + Gwinya - R18</p>
+<input type="number" min="0" placeholder="Quantity" id="combo2">
+</div>
+
+<div class="menu-item">
+<img src="images/Combo 3.jpeg">
+<h3>Combo 3</h3>
+<p class="price">Chips + Large Russian - R35</p>
+<input type="number" min="0" placeholder="Quantity" id="combo3">
+</div>
+
+<div class="menu-item">
+<img src="images/Combo 4.jpeg">
+<h3>Combo 4</h3>
+<p class="price">Chips + Hot Dog - R35</p>
+<input type="number" min="0" placeholder="Quantity" id="combo4">
+</div>
+
+</div>
+
+<h2>Extras</h2>
+
+<div class="menu-container">
+<div class="menu-item">
+<img src="images/cheese.jpeg">
+<h3>Cheese Slice</h3>
+<p class="price">R3</p>
+<input type="number" min="0" placeholder="Quantity" id="cheese">
+</div>
+
+<div class="menu-item">
+<img src="images/Polony.jpeg">
+<h3>Polony Slice</h3>
+<p class="price">R1.50</p>
+<input type="number" min="0" placeholder="Quantity" id="polony">
+</div>
+</div>
+
+<div class="order-section">
+<h2>Order & Payment</h2>
+<p><strong>Pickup Only</strong></p>
+<p>PayShap ID: <strong>0649481853@capitec</strong></p>
+
+<button onclick="copyPayShap()">Copy PayShap ID</button>
+<br><br>
+<h3 id="totalAmount">Total: R0.00</h3>
+<br><br>
+<button onclick="sendOrder()" class="whatsapp-btn">Send Order via WhatsApp</button>
+<br><br>
+<button onclick="downloadMenu()">Download PDF Menu</button>
+</div>
+
+<footer>
+<p>WhatsApp: 078 380 1787</p>
+<p>Matatiele Sibi Bethel, South Africa</p>
+<p>© 2026 Bubbly’s Kitchen</p>
+
+<p1>© 2026 Chilly Shot's Production</p1>
+</footer>
+
+<script>
+
+const prices = {
+chipsSmall: 16,
+chipsMedium: 22,
+chipsLarge: 30,
+hotdog: 22,
+fatcake: 5,
+russian: 16,
+combo1: 12,
+combo2: 18,
+combo3: 35,
+combo4: 35,
+cheese: 3,
+polony: 1.5
+};
+
+function calculateTotal() {
+let total = 0;
+
+for (let id in prices) {
+let qty = parseFloat(document.getElementById(id).value) || 0;
+total += qty * prices[id];
+}
+
+document.getElementById("totalAmount").innerText = "Total: R" + total.toFixed(2);
+return total;
+}
+
+function copyPayShap() {
+navigator.clipboard.writeText("0649481853@capitec");
+alert("PayShap ID copied!");
+}
+
+function sendOrder() {
+
+let total = calculateTotal();
+let message = "Hello Bubbly's Kitchen,%0A%0AI would like to order:%0A";
+
+for (let id in prices) {
+let qty = parseFloat(document.getElementById(id).value) || 0;
+if(qty > 0){
+let itemName = document.querySelector(`[id="${id}"]`).parentElement.querySelector("h3").innerText;
+message += qty + " x " + itemName + "%0A";
+}
+}
+
+message += "%0ATotal: R" + total.toFixed(2);
+message += "%0A%0AThis is for PICKUP.%0AI will pay via PayShap (0649481853@capitec).";
+
+window.open("https://wa.me/27781406361?text=" + message, "_blank");
+}
+
+async function downloadMenu() {
+  const { jsPDF } = window.jspdf;
+  const doc = new jsPDF({ unit: 'pt', format: 'a4' });
+  const content = `BUBBLY'S KITCHEN
+MADE FRESH WHILE YOU WAIT!!
+
+Potato Chips:
+Small R16
+Medium R22
+Large R30
+
+Hot Dog R22
+Fat Cake R5
+Russian R16
+
+Combo Deals:
+Combo 1 R12
+Combo 2 R18
+Combo 3 R35
+Combo 4 R35
+
+Extras:
+Cheese Slice R3
+Polony Slice R1.50
+
+Pickup Only
+PayShap: 0649481853@capitec
+`;
+  const margin = 40;
+  const maxWidth = doc.internal.pageSize.getWidth() - margin * 2;
+  const lines = doc.splitTextToSize(content, maxWidth);
+  doc.text(lines, margin, margin + 12);
+  doc.save('Bubblys_Kitchen_Menu.pdf');
+}
+
+// Auto update total when quantity changes
+document.querySelectorAll("input[type='number']").forEach(input => {
+input.addEventListener("input", calculateTotal);
+});
+
+</script><script>
+
+const prices = {
+chipsSmall: 16,
+chipsMedium: 22,
+chipsLarge: 30,
+hotdog: 22,
+fatcake: 5,
+russian: 16,
+combo1: 12,
+combo2: 18,
+combo3: 35,
+combo4: 35,
+cheese: 3,
+polony: 1.5
+};
+
+function calculateTotal() {
+let total = 0;
+
+for (let id in prices) {
+let qty = parseFloat(document.getElementById(id).value) || 0;
+total += qty * prices[id];
+}
+
+document.getElementById("totalAmount").innerText = "Total: R" + total.toFixed(2);
+return total;
+}
+
+function copyPayShap() {
+navigator.clipboard.writeText("0649481853@capitec");
+alert("PayShap ID copied!");
+}
+
+function sendOrder() {
+
+let total = calculateTotal();
+let message = "Hello Bubbly's Kitchen,%0A%0AI would like to Order:%0A";
+
+for (let id in prices) {
+let qty = parseFloat(document.getElementById(id).value) || 0;
+if(qty > 0){
+let itemName = document.querySelector(`[id="${id}"]`).parentElement.querySelector("h3").innerText;
+message += qty + " x " + itemName + "%0A";
+}
+}
+
+message += "%0ATotal: R" + total.toFixed(2);
+message += "%0A%0AThis is for PICKUP.%0AI will pay via PayShap (0649481853@capitec).";
+
+window.open("https://wa.me/27735087545?text=" + message, "_blank");
+}
+
+function downloadMenu() {
+const content = `
+BUBBLY'S KITCHEN
+MADE FRESH WHILE YOU WAIT
+
+Potato Chips:
+Small R16
+Medium R22
+Large R30
+
+Hot Dog R22
+Fat Cake R5
+Russian R16
+
+Combo Deals:
+Combo 1 R12
+Combo 2 R18
+Combo 3 R35
+Combo 4 R35
+
+Extras:
+Cheese Slice R3
+Polony Slice R1.50
+
+Pickup Only
+PayShap: 0649481853@capitec
+`;
+
+const blob = new Blob([content], { type: "application/pdf" });
+const link = document.createElement("a");
+link.href = URL.createObjectURL(blob);
+link.download = "Bubblys_Kitchen_Menu.pdf";
+link.click();
+}
+
+// Auto update total when quantity changes
+document.querySelectorAll("input[type='number']").forEach(input => {
+input.addEventListener("input", calculateTotal);
+});
+
+</script>
+
+</body>
+</html>
