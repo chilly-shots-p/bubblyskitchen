@@ -4,7 +4,7 @@
 <link rel="stylesheet" href="style.css">
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Bubbly's Kitchen</title>
+<title>Bubbly's Kitchen CSP</title>
 
 <style>
 body {
@@ -260,7 +260,7 @@ alert("PayShap ID copied!");
 function sendOrder() {
 
 let total = calculateTotal();
-let message = "Hello Bubbly's Kitchen,%0A%0AI would like to order:%0A";
+let message = "Hello Bubbly's Kitchen CSP,%0A%0AI would like to order:%0A";
 
 for (let id in prices) {
 let qty = parseFloat(document.getElementById(id).value) || 0;
@@ -279,7 +279,7 @@ window.open("https://wa.me/27781406361?text=" + message, "_blank");
 async function downloadMenu() {
   const { jsPDF } = window.jspdf;
   const doc = new jsPDF({ unit: 'pt', format: 'a4' });
-  const content = `BUBBLY'S KITCHEN
+  const content = `BUBBLY'S KITCHEN CSP
 MADE FRESH WHILE YOU WAIT!!
 
 Potato Chips:
@@ -353,7 +353,7 @@ alert("PayShap ID copied!");
 function sendOrder() {
 
 let total = calculateTotal();
-let message = "Hello Bubbly's Kitchen,%0A%0AI would like to Order:%0A";
+let message = "Hello Bubbly's Kitchen CSP,%0A%0AI would like to Order:%0A";
 
 for (let id in prices) {
 let qty = parseFloat(document.getElementById(id).value) || 0;
@@ -400,7 +400,7 @@ PayShap: 0649481853@capitec
 const blob = new Blob([content], { type: "application/pdf" });
 const link = document.createElement("a");
 link.href = URL.createObjectURL(blob);
-link.download = "Bubblys_Kitchen_Menu.pdf";
+link.download = "Bubblys_Kitchen_CSP_Menu.pdf";
 link.click();
 }
 
@@ -416,18 +416,18 @@ input.addEventListener("input", calculateTotal);
     <p><strong>Bubbly's Kitchen CSP – House Rules</strong></p>
 <p>​By purchasing food from Bubbly's Kitchen CSP, you agree to the following terms.</p>
     <p><strong>1. Payments:</strong> We accept Cash and Instant EFT. Payment is due before preparation.</p>
-    <p>​Accepted Methods: We accept Cash, Instant EFT, PayShap.
-​Immediate Payment: Payment is required in full before preparation. No credit or "pay later" options are available.
-​Prices: Prices are subject to change without prior notice, but the price displayed at the time of your order is the price you pay.</p>
+    <p>​Accepted Methods: We accept Cash, Instant EFT, PayShap.</p>
+<p>>​Immediate Payment: Payment is required in full before preparation. No credit or "pay later" options are available.</p>
+<p>Prices: Prices are subject to change without prior notice, but the price displayed at the time of your order is the price you pay.</p>
     
 <p><strong>2. Orders & Waiting Times</strong></p>
-    <p>​Preparation Time: All food is prepared fresh. Please allow approximately 35 Minutes for your order to be ready during busy periods.</p>
+    <p>​Preparation Time: All food is prepared fresh. Please allow approximately 35 Minutes for your order to be ready during busy periods and none-busy times 15-20 Minutes.</p>
     <p>​Cancellations: Once preparation has begun, orders cannot be cancelled or refunded.</p>
     <p>​Collection: Please collect your order promptly. We are not responsible for the quality of food that has been left standing for long periods after being called.</p>
 
     <p><strong>3. Allergens:</strong> Our kitchen handles nuts, dairy, and wheat.</p>
-    <p>​Allergen Warning: Our food is prepared in a kitchen that handles common allergens, including nuts, dairy, wheat, eggs, pork. While we take precautions, we cannot guarantee that our products are 100% allergen-free.
-​Customer Responsibility: It is the customer's responsibility to inform us of any dietary restrictions or allergies before placing an order.</p>
+    <p>​Allergen Warning: Our food is prepared in a kitchen that handles common allergens, including nuts, dairy, wheat, eggs, pork. While we take precautions, we cannot guarantee that our products are 100% allergen-free.</p>
+<p>​Customer Responsibility: It is the customer's responsibility to inform us of any dietary restrictions or allergies before placing an order.</p>
 
 <p><strong></strong></p>
     
@@ -446,6 +446,7 @@ input.addEventListener("input", calculateTotal);
 </body>
 
 </html>
+
 
 
 
