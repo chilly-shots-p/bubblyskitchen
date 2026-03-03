@@ -60,3 +60,128 @@ max-height: 80vh;
   color: #333;
 
 }
+
+/* 1. Page Background */
+body {
+    background: #000;
+    margin: 0;
+    height: 100vh;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Arial', sans-serif;
+}
+
+/* 2. The "Welcome!!" Text Styling */
+.welcome-text {
+    color: #fff;
+    font-size: 5rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    
+    /* Neon Glow Effect */
+    text-shadow: 
+        0 0 10px #ff00de,
+        0 0 20px #ff00de,
+        0 0 40px #ff00de,
+        0 0 80px #ff00de;
+    
+    /* Typewriter Animation Setup */
+    overflow: hidden;
+    border-right: .15em solid orange; /* The cursor */
+    white-space: nowrap;
+    margin: 0 auto;
+    letter-spacing: .15em;
+    width: 0; /* Start invisible */
+    
+    /* The Animation: 3s duration, 14 steps (adjust for longer text) */
+    animation: 
+        typing 3s steps(14, end) forwards,
+        blink-caret .75s step-end infinite;
+    
+    z-index: 10;
+    position: relative;
+}
+
+/* Typing Keyframes */
+@keyframes typing {
+    from { width: 0 }
+    to { width: 100% } /* or specific width like 26rem if 100% is too wide */
+}
+
+/* Cursor Blinking Keyframes */
+@keyframes blink-caret {
+    from, to { border-color: transparent }
+    50% { border-color: orange; }
+}
+
+/* 3. Fireworks Animation */
+@keyframes firework {
+    0% { transform: translate(var(--x), var(--initialY)); width: var(--initialSize); opacity: 1; }
+    50% { width: 0.5vmin; opacity: 1; }
+    100% { width: var(--finalSize); opacity: 0; }
+}
+
+.firework, 
+.firework::before, 
+.firework::after {
+    --initialSize: 0.5vmin;
+    --finalSize: 45vmin;
+    --particleSize: 0.2vmin;
+    --color1: yellow;
+    --color2: khaki;
+    --color3: white;
+    --color4: lime;
+    --color5: gold;
+    --color6: mediumseagreen;
+    --y: -30vmin;
+    --x: -50%;
+    --initialY: 60vmin;
+    content: "";
+    animation: firework 2s infinite;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, var(--y));
+    width: var(--initialSize);
+    aspect-ratio: 1;
+    background: 
+        radial-gradient(circle, var(--color1) var(--particleSize), #0000 0) 50% 0%,
+        radial-gradient(circle, var(--color2) var(--particleSize), #0000 0) 100% 50%,
+        radial-gradient(circle, var(--color3) var(--particleSize), #0000 0) 50% 100%,
+        radial-gradient(circle, var(--color4) var(--particleSize), #0000 0) 0% 50%,
+        radial-gradient(circle, var(--color5) var(--particleSize), #0000 0) 80% 90%,
+        radial-gradient(circle, var(--color6) var(--particleSize), #0000 0) 95% 90%,
+        radial-gradient(circle, var(--color1) var(--particleSize), #0000 0) 90% 70%,
+        radial-gradient(circle, var(--color2) var(--particleSize), #0000 0) 100% 60%,
+        radial-gradient(circle, var(--color3) var(--particleSize), #0000 0) 55% 80%,
+        radial-gradient(circle, var(--color4) var(--particleSize), #0000 0) 70% 77%;
+    background-size: var(--initialSize) var(--initialSize);
+    background-repeat: no-repeat;
+}
+
+.firework::before { transform: translate(-50%, -50%) rotate(25deg) !important; }
+.firework::after { transform: translate(-50%, -50%) rotate(-37deg) !important; }
+
+/* Firework 2 (Pink/Purple) */
+.firework:nth-child(2) {
+    --x: 30vmin;
+}
+.firework:nth-child(2), .firework:nth-child(2)::before, .firework:nth-child(2)::after {
+    --color1: pink; --color2: violet; --color3: fuchsia; --color4: orchid; --color5: plum; --color6: lavender;
+    --finalSize: 40vmin;
+    left: 30%; top: 60%;
+    animation-delay: -0.25s;
+}
+
+/* Firework 3 (Blue/Cyan) */
+.firework:nth-child(3) {
+    --x: -30vmin; --y: -50vmin;
+}
+.firework:nth-child(3), .firework:nth-child(3)::before, .firework:nth-child(3)::after {
+    --color1: cyan; --color2: lightcyan; --color3: lightblue; --color4: palequoturquoise; --color5: skyblue; --color6: lavender;
+    --finalSize: 35vmin;
+    left: 70%; top: 60%;
+    animation-delay: -0.4s;
+}
