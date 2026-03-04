@@ -181,3 +181,20 @@ max-height: 80vh;
     top: 50%;
     animation-delay: -0.4s;
 }
+
+/* --- CYBERD'VIL --- */
+@media (max-width: 600px) {
+    .open-text {
+      
+        font-size: 10vw !important; 
+
+        text-shadow: 
+            0 0 5px #ff00de,
+            0 0 10px #ff00de,
+            0 0 20px #ff00de;
+    }
+    
+    .firework {
+        margin-top: -20%;
+    }
+}
