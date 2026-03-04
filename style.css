@@ -61,7 +61,7 @@ max-height: 80vh;
 
 }
 
-/* 1. The Container - Sits on top of your site */
+/* 1. CYBERD'VIL */
 #opening-screen {
     position: fixed; 
     top: 0;
@@ -101,7 +101,7 @@ max-height: 80vh;
     width: 0;
     
     animation: 
-        typing 2.5s steps(12, end) forwards,
+        typing 2.5s steps(14, end) forwards,
         blink-caret .80s step-end infinite;
     
     position: relative;
@@ -110,7 +110,7 @@ max-height: 80vh;
 
 @keyframes typing {
     from { width: 0 }
-    to { width: 12ch; } 
+    to { width: 14ch; } 
 }
 
 @keyframes blink-caret {
@@ -198,3 +198,4 @@ max-height: 80vh;
         margin-top: -20%;
     }
 }
+
