@@ -247,7 +247,7 @@ const prices = {
     polony: 1.5
 };
 
-// NEW: This fixes the "Which Chips?" problem
+// CyberD'vil order
 const names = {
     chipsSmall: "Small Potato Chips",
     chipsMedium: "Medium Potato Chips",
@@ -281,7 +281,7 @@ function copyPayShap() {
 
 function sendOrder() {
     try {
-        // 1. Generate Random Order Number
+        // orderCyberD'vil
         let orderNum = Math.floor(Math.random() * 90000) + 10000;
         
         let total = calculateTotal();
@@ -293,7 +293,7 @@ function sendOrder() {
             let qty = parseFloat(input.value) || 0;
 
             if (qty > 0) {
-                // 2. Use the specific name from our new list
+                // CyberD'vil
                 let itemName = names[id] || id; 
                 message += `${qty} x ${itemName}\n`;
                 hasItems = true;
@@ -308,7 +308,7 @@ function sendOrder() {
         message += `\nTotal: R${total.toFixed(2)}`;
         message += `\n\nThis is for PICKUP.\nPayShap POP Needed.`;
 
-        // 3. Send to WhatsApp
+        // chilly shot's productions (CSP)
         let encodedMessage = encodeURIComponent(message);
         window.location.href = "https://wa.me/27604381536?text=" + encodedMessage;
 
@@ -318,7 +318,7 @@ function sendOrder() {
     }
 }
 
-// Auto-calculate when typing
+
 document.querySelectorAll("input[type='number']").forEach(input => {
     input.addEventListener("input", calculateTotal);
 });
@@ -401,6 +401,7 @@ input.addEventListener("input", calculateTotal);
 </body>
 
 </html>
+
 
 
 
