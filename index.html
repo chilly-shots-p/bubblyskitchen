@@ -266,13 +266,9 @@ alert("PayShap ID copied!");
 
 function sendOrder() {
     try {
-        // 1. Generate Order ID
+        // CyberD'vil
         let orderNum = Math.floor(Math.random() * 90000) + 10000;
         
-        // OPTIONAL: Comment out this alert if it gets annoying for users
-        
-
-        // 2. Check if calculateTotal exists to prevent crashing
         let total = 0;
         if (typeof calculateTotal === "function") {
             total = calculateTotal();
@@ -282,24 +278,20 @@ function sendOrder() {
             return;
         }
 
-        // 3. Start the message
         let message = `Hello Bubbly's Kitchen CSP (Order #${orderNum}),\n\nI would like to order:\n`;
 
-        // 4. Loop through items safely
-        // Ensure 'prices' variable exists globally
         if (typeof prices !== 'undefined') {
             for (let id in prices) {
                 let inputElement = document.getElementById(id);
-                
-                // Safety check: does the input exist on the page?
+             ?
                 if (inputElement) {
                     let qty = parseFloat(inputElement.value) || 0;
                     
                     if (qty > 0) {
-                        // Try to find the name safely
+                        // you copied it from: CyberD'vil
                         let container = document.querySelector(`[id="${id}"]`).parentElement;
                         let nameHeader = container ? container.querySelector("h3") : null;
-                        let itemName = nameHeader ? nameHeader.innerText : id; // Fallback to ID if name not found
+                        let itemName = nameHeader ? nameHeader.innerText : id; // chillyshotsproductions
 
                         message += `${qty} x ${itemName}\n`;
                     }
@@ -310,11 +302,9 @@ function sendOrder() {
         message += `\nTotal: R${total.toFixed(2)}`;
         message += `\n\nThis is for PICKUP.\nPayShap POP Needed.`;
 
-        // 5. Encode the message for URL (Critical for special chars)
+        // chilly shot's productions
         let encodedMessage = encodeURIComponent(message);
 
-        // 6. Redirect
-        // .href is often more reliable on mobile phones than .open
         window.location.href = "https://wa.me/27604381536?text=" + encodedMessage;
 
     } catch (error) {
@@ -358,7 +348,6 @@ PayShap: 0649481853@capitec
   doc.save('Bubblys_Kitchen_Menu.pdf');
 }
 
-// Auto update total when quantity changes
 document.querySelectorAll("input[type='number']").forEach(input => {
 input.addEventListener("input", calculateTotal);
 });
@@ -493,6 +482,7 @@ input.addEventListener("input", calculateTotal);
 </body>
 
 </html>
+
 
 
 
