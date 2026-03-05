@@ -233,177 +233,96 @@ footer {
 <script>
 
 const prices = {
-chipsSmall: 16,
-chipsMedium: 22,
-chipsLarge: 30,
-hotdog: 22,
-fatcake: 5,
-russian: 16,
-combo1: 12,
-combo2: 18,
-combo3: 35,
-combo4: 35,
-cheese: 3,
-polony: 1.5
+    chipsSmall: 16,
+    chipsMedium: 22,
+    chipsLarge: 30,
+    hotdog: 22,
+    fatcake: 5,
+    russian: 16,
+    combo1: 12,
+    combo2: 18,
+    combo3: 35,
+    combo4: 35,
+    cheese: 3,
+    polony: 1.5
+};
+
+// NEW: This fixes the "Which Chips?" problem
+const names = {
+    chipsSmall: "Small Potato Chips",
+    chipsMedium: "Medium Potato Chips",
+    chipsLarge: "Large Potato Chips",
+    hotdog: "Hot Dog",
+    fatcake: "Fat Cake (Gwinya)",
+    russian: "Russian Sausage",
+    combo1: "Combo 1 (Chips + Gwinya)",
+    combo2: "Combo 2 (Chips + Russian + Gwinya)",
+    combo3: "Combo 3 (Chips + Large Russian)",
+    combo4: "Combo 4 (Chips + Hot Dog)",
+    cheese: "Cheese Slice",
+    polony: "Polony Slice"
 };
 
 function calculateTotal() {
-let total = 0;
-
-for (let id in prices) {
-let qty = parseFloat(document.getElementById(id).value) || 0;
-total += qty * prices[id];
-}
-
-document.getElementById("totalAmount").innerText = "Total: R" + total.toFixed(2);
-return total;
+    let total = 0;
+    for (let id in prices) {
+        let input = document.getElementById(id);
+        let qty = parseFloat(input.value) || 0;
+        total += qty * prices[id];
+    }
+    document.getElementById("totalAmount").innerText = "Total: R" + total.toFixed(2);
+    return total;
 }
 
 function copyPayShap() {
-navigator.clipboard.writeText("0649481853@capitec");
-alert("PayShap ID copied!");
+    navigator.clipboard.writeText("0649481853@capitec");
+    alert("PayShap ID copied!");
 }
 
 function sendOrder() {
     try {
-        // CyberD'vil
+        // 1. Generate Random Order Number
         let orderNum = Math.floor(Math.random() * 90000) + 10000;
         
-        let total = 0;
-        if (typeof calculateTotal === "function") {
-            total = calculateTotal();
-        } else {
-            console.error("Error: calculateTotal() function is missing!");
-            alert("System Error: Could not calculate total.");
-            return;
+        let total = calculateTotal();
+        let message = `Hello Bubbly's Kitchen CSP (Order #${orderNum}),\n\nI would like to order:\n`;
+        let hasItems = false;
+
+        for (let id in prices) {
+            let input = document.getElementById(id);
+            let qty = parseFloat(input.value) || 0;
+
+            if (qty > 0) {
+                // 2. Use the specific name from our new list
+                let itemName = names[id] || id; 
+                message += `${qty} x ${itemName}\n`;
+                hasItems = true;
+            }
         }
 
-        let message = `Hello Bubbly's Kitchen CSP (Order #${orderNum}),\n\nI would like to order:\n`;
-
-        if (typeof prices !== 'undefined') {
-            for (let id in prices) {
-                let inputElement = document.getElementById(id);
-             ?
-                if (inputElement) {
-                    let qty = parseFloat(inputElement.value) || 0;
-                    
-                    if (qty > 0) {
-                        // you copied it from: CyberD'vil
-                        let container = document.querySelector(`[id="${id}"]`).parentElement;
-                        let nameHeader = container ? container.querySelector("h3") : null;
-                        let itemName = nameHeader ? nameHeader.innerText : id; // chillyshotsproductions
-
-                        message += `${qty} x ${itemName}\n`;
-                    }
-                }
-            }
+        if (!hasItems) {
+            alert("Please select at least one item.");
+            return;
         }
 
         message += `\nTotal: R${total.toFixed(2)}`;
         message += `\n\nThis is for PICKUP.\nPayShap POP Needed.`;
 
-        // chilly shot's productions
+        // 3. Send to WhatsApp
         let encodedMessage = encodeURIComponent(message);
-
         window.location.href = "https://wa.me/27604381536?text=" + encodedMessage;
 
     } catch (error) {
-        console.error("An error occurred:", error);
-        alert("Something went wrong sending the order. Please check the console.");
+        console.error("Error:", error);
+        alert("Something went wrong. Please try again.");
     }
 }
 
-async function downloadMenu() {
-  const { jsPDF } = window.jspdf;
-  const doc = new jsPDF({ unit: 'pt', format: 'a4' });
-  const content = `BUBBLY'S KITCHEN CSP
-MADE FRESH WHILE YOU WAIT!!
-
-Potato Chips:
-Small R16
-Medium R22
-Large R30
-
-Hot Dog R22
-Fat Cake R5
-Russian R16
-
-Combo Deals:
-Combo 1 R12
-Combo 2 R18
-Combo 3 R35
-Combo 4 R35
-
-Extras:
-Cheese Slice R3
-Polony Slice R1.50
-
-Pickup Only
-PayShap: 0649481853@capitec
-`;
-  const margin = 40;
-  const maxWidth = doc.internal.pageSize.getWidth() - margin * 2;
-  const lines = doc.splitTextToSize(content, maxWidth);
-  doc.text(lines, margin, margin + 12);
-  doc.save('Bubblys_Kitchen_Menu.pdf');
-}
-
+// Auto-calculate when typing
 document.querySelectorAll("input[type='number']").forEach(input => {
-input.addEventListener("input", calculateTotal);
+    input.addEventListener("input", calculateTotal);
 });
 
-</script><script>
-
-const prices = {
-chipsSmall: 16,
-chipsMedium: 22,
-chipsLarge: 30,
-hotdog: 22,
-fatcake: 5,
-russian: 16,
-combo1: 12,
-combo2: 18,
-combo3: 35,
-combo4: 35,
-cheese: 3,
-polony: 1.5
-};
-
-function calculateTotal() {
-let total = 0;
-
-for (let id in prices) {
-let qty = parseFloat(document.getElementById(id).value) || 0;
-total += qty * prices[id];
-}
-
-document.getElementById("totalAmount").innerText = "Total: R" + total.toFixed(2);
-return total;
-}
-
-function copyPayShap() {
-navigator.clipboard.writeText("0649481853@capitec");
-alert("PayShap ID copied!");
-}
-
-function sendOrder() {
-
-let total = calculateTotal();
-let message = "Hello Bubbly's Kitchen CSP,%0A%0AI would like to Order:%0A";
-
-for (let id in prices) {
-let qty = parseFloat(document.getElementById(id).value) || 0;
-if(qty > 0){
-let itemName = document.querySelector(`[id="${id}"]`).parentElement.querySelector("h3").innerText;
-message += qty + " x " + itemName + "%0A";
-}
-}
-
-message += "%0ATotal: R" + total.toFixed(2);
-message += "%0A%0AThis is for PICKUP.%0AI will pay via PayShap (0649481853@capitec).";
-
-window.open("https://wa.me/27604381536?text=" + message, "_blank");
-}
 
 function downloadMenu() {
 const content = `
@@ -482,6 +401,7 @@ input.addEventListener("input", calculateTotal);
 </body>
 
 </html>
+
 
 
 
